@@ -1,33 +1,22 @@
 class Solution {
 public:
-    int hat(vector<int> nums,int k)
-    {
-        unordered_map<int,int> mp;
-        int ans=0;
-        for (int i=0;i<nums.size();i++)
-        {
-            mp[nums[i]]++;
-        }
-        for (auto x: mp)
-        {
-            if (x.second>=2)  ans++;
-        }
-        return ans;
-    }
     int findPairs(vector<int>& nums, int k) {
-        if (k==0)   return hat(nums,0);
-        unordered_set<int> st1;
-        int count=0;
-        for (int i=0;i<nums.size();i++)
+        unordered_map<int,int> a;
+        for(int i:nums)
+            a[i]++;
+        int ans=0;
+        for(auto x:a)
         {
-            if (st1.find(nums[i])==st1.end() && (st1.find(k+nums[i])!=st1.end() || st1.find(nums[i]-k)!=st1.end()))
-            {
-               if (st1.find(k+nums[i])!=st1.end()) count++;
-                if (st1.find(nums[i]-k)!=st1.end())   count++;
+            if(k==0)
+            {    
+                if(x.second>1)
+                ans++;
             }
-            st1.insert(nums[i]);
-            
+             else if(a.find(x.first+k)!=a.end())
+                ans++;
         }
-        return count;
+        
+        return ans;
+        
     }
 };
