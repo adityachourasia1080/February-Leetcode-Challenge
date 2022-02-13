@@ -1,0 +1,22 @@
+class Solution {
+public:
+    void knap(vector<int> nums,int n, vector<vector<int>>&ans,vector<int> temp)
+    {
+        if (n==nums.size())
+        {
+            ans.push_back(temp);
+            return ;
+        }
+        
+        knap(nums,n+1,ans,temp);
+        temp.push_back(nums[n]);
+        knap(nums,n+1,ans,temp);
+        temp.pop_back();
+    }
+    vector<vector<int>> subsets(vector<int>& nums) {
+        vector<vector<int>> ans;
+        vector<int> temp;
+        knap(nums,0,ans,temp);
+        return ans;
+    }
+};
