@@ -1,0 +1,32 @@
+class Solution {
+public:
+    vector<vector<int>> ans;
+    void knap(vector<int>& c, int t,int i,int n,vector<int> temp)
+    {
+        if (t==0)
+        {
+            ans.push_back(temp);
+            return ;
+        }
+        if (i==n)  return ;
+        
+        if (c[i]<=t)
+        {
+            temp.push_back(c[i]);
+            knap(c,t-c[i],i,n,temp);
+            temp.pop_back();
+        }
+        
+        knap(c,t,i+1,n,temp);
+    }
+    vector<vector<int>> combinationSum(vector<int>& c, int t) {
+        
+       
+        vector<int> temp;
+        knap(c,t,0,c.size(),temp);
+        sort(ans.begin(),ans.end());
+        ans.erase(unique(ans.begin(),ans.end()),ans.end());
+        return ans;
+        
+    }
+};
