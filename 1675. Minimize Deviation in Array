@@ -1,0 +1,30 @@
+ int minimumDeviation(vector<int>& nums) {
+        
+        set<int> st;
+        for (int i=0;i<nums.size();i++)
+        {
+            if (nums [i] %2!=0)
+            {
+                st.insert(nums[i]*2);
+            }
+            else  st.insert(nums[i]);
+        }
+        
+        int diff= INT32_MAX;
+        while(true)
+        {
+            int miny= *(st.begin()),maxy= *(st.rbegin());
+            
+            diff=min(diff,maxy-miny);
+            
+            if (maxy %2==0)
+            {
+                st.erase(maxy);
+                st.insert(maxy/2);
+            }
+            else  break;
+            
+            
+        }
+        return diff;
+    }
